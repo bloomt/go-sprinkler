@@ -1,494 +1,59 @@
 <!DOCTYPE html>
-<!--
-Created using JS Bin
-http://jsbin.com
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>go sprinkler</title>
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	<script src="js/callAPI.js"></script>
 
-Copyright (c) 2017 by anonymous (http://jsbin.com/boburuwika/1/edit)
-
-Released under the MIT license: http://jsbin.mit-license.org
--->
-<meta name="robots" content="noindex">
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>GO Sprinkler</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-<style id="jsbin-css">
-body {
-  background: #f5f5f5;
-
-  h1 {
-    text-align: center;
-    font-family: arial;
-    color: #5a5a5a;
-  }
-
-  ul {
-    display: flex;
-    list-style:none;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content:center;
-    flex-basis: 80%;
-
-    li {
-      flex-basis: 20%;
-      display:flex;
-      flex-direction: column;
-      margin-bottom: 20px;
-      align-items:center;
-
-      span {
-        font-family: arial;
-        font-size: 14px;
-        color: #5a5a5a;
-        text-align: center;
-      }
-
-      img {
-        margin: 5px;
-        border-radius: 3px;
-        box-shadow: 1px 1px 3px rgba(0,0,0,0.2); 
-      }
-    }
-  }
-
-}
-
-.segmented-control {
-  position: relative;
-  display: inline-block;
-  border: 1px solid currentColor;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  overflow: hidden;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -moz-user-select: -moz-none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -moz-transition-duration: 0.7s;
-  -o-transition-duration: 0.7s;
-  -webkit-transition-duration: 0.7s;
-  transition-duration: 0.7s;
-  -moz-transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
-  -o-transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
-  -webkit-transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
-  transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
-  -moz-transition-property: none;
-  -o-transition-property: none;
-  -webkit-transition-property: none;
-  transition-property: none;
-  -webkit-tap-highlight-color: transparent; }
-  .segmented-control > input {
-    position: absolute;
-    left: -10000px;
-    opacity: 0; }
-    .segmented-control > input[type='checkbox'] ~ label {
-      -moz-transition-duration: 0s;
-      -o-transition-duration: 0s;
-      -webkit-transition-duration: 0s;
-      transition-duration: 0s; }
-      .segmented-control > input[type='checkbox'] ~ label:before {
-        opacity: 0; }
-    .segmented-control > input:disabled:nth-child(1) ~ label:nth-of-type(1) {
-      opacity: 0.3;
-      cursor: not-allowed; }
-    .segmented-control > input:nth-child(1):checked ~ label:nth-of-type(1):after, .segmented-control > input:nth-child(1):checked ~ label:nth-of-type(1):before {
-      opacity: 1; }
-    .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(1):after, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(1):before, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(1) ~ label:after, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(1) ~ label:before {
-      -moz-transform: translateX(0%);
-      -ms-transform: translateX(0%);
-      -webkit-transform: translateX(0%);
-      transform: translateX(0%); }
-    .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(2):after, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(2):before, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(2) ~ label:after, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(2) ~ label:before {
-      -moz-transform: translateX(0%);
-      -ms-transform: translateX(0%);
-      -webkit-transform: translateX(0%);
-      transform: translateX(0%); }
-    .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(3):after, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(3):before, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(3) ~ label:after, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(3) ~ label:before {
-      -moz-transform: translateX(0%);
-      -ms-transform: translateX(0%);
-      -webkit-transform: translateX(0%);
-      transform: translateX(0%); }
-    .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(4):after, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(4):before, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(4) ~ label:after, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(4) ~ label:before {
-      -moz-transform: translateX(0%);
-      -ms-transform: translateX(0%);
-      -webkit-transform: translateX(0%);
-      transform: translateX(0%); }
-    .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(5):after, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(5):before, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(5) ~ label:after, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(5) ~ label:before {
-      -moz-transform: translateX(0%);
-      -ms-transform: translateX(0%);
-      -webkit-transform: translateX(0%);
-      transform: translateX(0%); }
-    .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(6):after, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(6):before, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(6) ~ label:after, .segmented-control > input:nth-child(1):checked ~ label:first-of-type:nth-last-of-type(6) ~ label:before {
-      -moz-transform: translateX(0%);
-      -ms-transform: translateX(0%);
-      -webkit-transform: translateX(0%);
-      transform: translateX(0%); }
-    .segmented-control > input:disabled:nth-child(2) ~ label:nth-of-type(2) {
-      opacity: 0.3;
-      cursor: not-allowed; }
-    .segmented-control > input:nth-child(2):checked ~ label:nth-of-type(2):after, .segmented-control > input:nth-child(2):checked ~ label:nth-of-type(2):before {
-      opacity: 1; }
-    .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(2):after, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(2):before, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(2) ~ label:after, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(2) ~ label:before {
-      -moz-transform: translateX(100%);
-      -ms-transform: translateX(100%);
-      -webkit-transform: translateX(100%);
-      transform: translateX(100%); }
-    .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(3):after, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(3):before, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(3) ~ label:after, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(3) ~ label:before {
-      -moz-transform: translateX(100%);
-      -ms-transform: translateX(100%);
-      -webkit-transform: translateX(100%);
-      transform: translateX(100%); }
-    .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(4):after, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(4):before, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(4) ~ label:after, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(4) ~ label:before {
-      -moz-transform: translateX(100%);
-      -ms-transform: translateX(100%);
-      -webkit-transform: translateX(100%);
-      transform: translateX(100%); }
-    .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(5):after, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(5):before, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(5) ~ label:after, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(5) ~ label:before {
-      -moz-transform: translateX(100%);
-      -ms-transform: translateX(100%);
-      -webkit-transform: translateX(100%);
-      transform: translateX(100%); }
-    .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(6):after, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(6):before, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(6) ~ label:after, .segmented-control > input:nth-child(2):checked ~ label:first-of-type:nth-last-of-type(6) ~ label:before {
-      -moz-transform: translateX(100%);
-      -ms-transform: translateX(100%);
-      -webkit-transform: translateX(100%);
-      transform: translateX(100%); }
-    .segmented-control > input:disabled:nth-child(3) ~ label:nth-of-type(3) {
-      opacity: 0.3;
-      cursor: not-allowed; }
-    .segmented-control > input:nth-child(3):checked ~ label:nth-of-type(3):after, .segmented-control > input:nth-child(3):checked ~ label:nth-of-type(3):before {
-      opacity: 1; }
-    .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(3):after, .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(3):before, .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(3) ~ label:after, .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(3) ~ label:before {
-      -moz-transform: translateX(200%);
-      -ms-transform: translateX(200%);
-      -webkit-transform: translateX(200%);
-      transform: translateX(200%); }
-    .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(4):after, .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(4):before, .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(4) ~ label:after, .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(4) ~ label:before {
-      -moz-transform: translateX(200%);
-      -ms-transform: translateX(200%);
-      -webkit-transform: translateX(200%);
-      transform: translateX(200%); }
-    .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(5):after, .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(5):before, .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(5) ~ label:after, .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(5) ~ label:before {
-      -moz-transform: translateX(200%);
-      -ms-transform: translateX(200%);
-      -webkit-transform: translateX(200%);
-      transform: translateX(200%); }
-    .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(6):after, .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(6):before, .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(6) ~ label:after, .segmented-control > input:nth-child(3):checked ~ label:first-of-type:nth-last-of-type(6) ~ label:before {
-      -moz-transform: translateX(200%);
-      -ms-transform: translateX(200%);
-      -webkit-transform: translateX(200%);
-      transform: translateX(200%); }
-    .segmented-control > input:disabled:nth-child(4) ~ label:nth-of-type(4) {
-      opacity: 0.3;
-      cursor: not-allowed; }
-    .segmented-control > input:nth-child(4):checked ~ label:nth-of-type(4):after, .segmented-control > input:nth-child(4):checked ~ label:nth-of-type(4):before {
-      opacity: 1; }
-    .segmented-control > input:nth-child(4):checked ~ label:first-of-type:nth-last-of-type(4):after, .segmented-control > input:nth-child(4):checked ~ label:first-of-type:nth-last-of-type(4):before, .segmented-control > input:nth-child(4):checked ~ label:first-of-type:nth-last-of-type(4) ~ label:after, .segmented-control > input:nth-child(4):checked ~ label:first-of-type:nth-last-of-type(4) ~ label:before {
-      -moz-transform: translateX(300%);
-      -ms-transform: translateX(300%);
-      -webkit-transform: translateX(300%);
-      transform: translateX(300%); }
-    .segmented-control > input:nth-child(4):checked ~ label:first-of-type:nth-last-of-type(5):after, .segmented-control > input:nth-child(4):checked ~ label:first-of-type:nth-last-of-type(5):before, .segmented-control > input:nth-child(4):checked ~ label:first-of-type:nth-last-of-type(5) ~ label:after, .segmented-control > input:nth-child(4):checked ~ label:first-of-type:nth-last-of-type(5) ~ label:before {
-      -moz-transform: translateX(300%);
-      -ms-transform: translateX(300%);
-      -webkit-transform: translateX(300%);
-      transform: translateX(300%); }
-    .segmented-control > input:nth-child(4):checked ~ label:first-of-type:nth-last-of-type(6):after, .segmented-control > input:nth-child(4):checked ~ label:first-of-type:nth-last-of-type(6):before, .segmented-control > input:nth-child(4):checked ~ label:first-of-type:nth-last-of-type(6) ~ label:after, .segmented-control > input:nth-child(4):checked ~ label:first-of-type:nth-last-of-type(6) ~ label:before {
-      -moz-transform: translateX(300%);
-      -ms-transform: translateX(300%);
-      -webkit-transform: translateX(300%);
-      transform: translateX(300%); }
-    .segmented-control > input:disabled:nth-child(5) ~ label:nth-of-type(5) {
-      opacity: 0.3;
-      cursor: not-allowed; }
-    .segmented-control > input:nth-child(5):checked ~ label:nth-of-type(5):after, .segmented-control > input:nth-child(5):checked ~ label:nth-of-type(5):before {
-      opacity: 1; }
-    .segmented-control > input:nth-child(5):checked ~ label:first-of-type:nth-last-of-type(5):after, .segmented-control > input:nth-child(5):checked ~ label:first-of-type:nth-last-of-type(5):before, .segmented-control > input:nth-child(5):checked ~ label:first-of-type:nth-last-of-type(5) ~ label:after, .segmented-control > input:nth-child(5):checked ~ label:first-of-type:nth-last-of-type(5) ~ label:before {
-      -moz-transform: translateX(400%);
-      -ms-transform: translateX(400%);
-      -webkit-transform: translateX(400%);
-      transform: translateX(400%); }
-    .segmented-control > input:nth-child(5):checked ~ label:first-of-type:nth-last-of-type(6):after, .segmented-control > input:nth-child(5):checked ~ label:first-of-type:nth-last-of-type(6):before, .segmented-control > input:nth-child(5):checked ~ label:first-of-type:nth-last-of-type(6) ~ label:after, .segmented-control > input:nth-child(5):checked ~ label:first-of-type:nth-last-of-type(6) ~ label:before {
-      -moz-transform: translateX(400%);
-      -ms-transform: translateX(400%);
-      -webkit-transform: translateX(400%);
-      transform: translateX(400%); }
-    .segmented-control > input:disabled:nth-child(6) ~ label:nth-of-type(6) {
-      opacity: 0.3;
-      cursor: not-allowed; }
-    .segmented-control > input:nth-child(6):checked ~ label:nth-of-type(6):after, .segmented-control > input:nth-child(6):checked ~ label:nth-of-type(6):before {
-      opacity: 1; }
-    .segmented-control > input:nth-child(6):checked ~ label:first-of-type:nth-last-of-type(6):after, .segmented-control > input:nth-child(6):checked ~ label:first-of-type:nth-last-of-type(6):before, .segmented-control > input:nth-child(6):checked ~ label:first-of-type:nth-last-of-type(6) ~ label:after, .segmented-control > input:nth-child(6):checked ~ label:first-of-type:nth-last-of-type(6) ~ label:before {
-      -moz-transform: translateX(500%);
-      -ms-transform: translateX(500%);
-      -webkit-transform: translateX(500%);
-      transform: translateX(500%); }
-  .segmented-control > label {
-    display: inline-block;
-    padding: 0 .71em;
-    cursor: pointer;
-    float: left;
-    line-height: 3em;
-    font-style: inherit;
-    font-weight: inherit;
-    text-decoration: inherit;
-    -moz-transition-property: none;
-    -o-transition-property: none;
-    -webkit-transition-property: none;
-    transition-property: none;
-    -moz-transition-duration: inherit;
-    -o-transition-duration: inherit;
-    -webkit-transition-duration: inherit;
-    transition-duration: inherit;
-    -moz-transition-timing-function: inherit;
-    -o-transition-timing-function: inherit;
-    -webkit-transition-timing-function: inherit;
-    transition-timing-function: inherit; }
-    .segmented-control > label:before, .segmented-control > label:after {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      -moz-transform: translateX(-100%);
-      -ms-transform: translateX(-100%);
-      -webkit-transform: translateX(-100%);
-      transform: translateX(-100%); }
-    .segmented-control > label:after {
-      color: white;
-      content: attr(data-value);
-      text-align: center;
-      padding: inherit;
-      z-index: 10;
-      font-style: inherit;
-      text-decoration: inherit;
-      font-weight: inherit;
-      opacity: 0;
-      -moz-transition-property: opacity, -moz-transform;
-      -o-transition-property: opacity, -o-transform;
-      -webkit-transition-property: opacity, -webkit-transform;
-      transition-property: opacity, transform;
-      -moz-transition-duration: inherit;
-      -o-transition-duration: inherit;
-      -webkit-transition-duration: inherit;
-      transition-duration: inherit;
-      -moz-transition-timing-function: inherit;
-      -o-transition-timing-function: inherit;
-      -webkit-transition-timing-function: inherit;
-      transition-timing-function: inherit; }
-    .segmented-control > label:after, .segmented-control > label {
-      text-align: center;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      -moz-box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box; }
-    .segmented-control > label:before {
-      content: '';
-      color: inherit;
-      background: currentColor;
-      -moz-transition-property: -moz-transform;
-      -o-transition-property: -o-transform;
-      -webkit-transition-property: -webkit-transform;
-      transition-property: transform;
-      -moz-transition-duration: inherit;
-      -o-transition-duration: inherit;
-      -webkit-transition-duration: inherit;
-      transition-duration: inherit;
-      -moz-transition-timing-function: inherit;
-      -o-transition-timing-function: inherit;
-      -webkit-transition-timing-function: inherit;
-      transition-timing-function: inherit; }
-    .segmented-control > label:first-of-type:nth-last-of-type(1), .segmented-control > label:first-of-type:nth-last-of-type(1):after, .segmented-control > label:first-of-type:nth-last-of-type(1):before, .segmented-control > label:first-of-type:nth-last-of-type(1) ~ label, .segmented-control > label:first-of-type:nth-last-of-type(1) ~ label:after, .segmented-control > label:first-of-type:nth-last-of-type(1) ~ label:before {
-      width: 100%; }
-    .segmented-control > label:first-of-type:nth-last-of-type(2), .segmented-control > label:first-of-type:nth-last-of-type(2):after, .segmented-control > label:first-of-type:nth-last-of-type(2):before, .segmented-control > label:first-of-type:nth-last-of-type(2) ~ label, .segmented-control > label:first-of-type:nth-last-of-type(2) ~ label:after, .segmented-control > label:first-of-type:nth-last-of-type(2) ~ label:before {
-      width: 50%; }
-    .segmented-control > label:first-of-type:nth-last-of-type(3), .segmented-control > label:first-of-type:nth-last-of-type(3):after, .segmented-control > label:first-of-type:nth-last-of-type(3):before, .segmented-control > label:first-of-type:nth-last-of-type(3) ~ label, .segmented-control > label:first-of-type:nth-last-of-type(3) ~ label:after, .segmented-control > label:first-of-type:nth-last-of-type(3) ~ label:before {
-      width: 33.33333%; }
-    .segmented-control > label:first-of-type:nth-last-of-type(4), .segmented-control > label:first-of-type:nth-last-of-type(4):after, .segmented-control > label:first-of-type:nth-last-of-type(4):before, .segmented-control > label:first-of-type:nth-last-of-type(4) ~ label, .segmented-control > label:first-of-type:nth-last-of-type(4) ~ label:after, .segmented-control > label:first-of-type:nth-last-of-type(4) ~ label:before {
-      width: 25%; }
-    .segmented-control > label:first-of-type:nth-last-of-type(5), .segmented-control > label:first-of-type:nth-last-of-type(5):after, .segmented-control > label:first-of-type:nth-last-of-type(5):before, .segmented-control > label:first-of-type:nth-last-of-type(5) ~ label, .segmented-control > label:first-of-type:nth-last-of-type(5) ~ label:after, .segmented-control > label:first-of-type:nth-last-of-type(5) ~ label:before {
-      width: 20%; }
-    .segmented-control > label:first-of-type:nth-last-of-type(6), .segmented-control > label:first-of-type:nth-last-of-type(6):after, .segmented-control > label:first-of-type:nth-last-of-type(6):before, .segmented-control > label:first-of-type:nth-last-of-type(6) ~ label, .segmented-control > label:first-of-type:nth-last-of-type(6) ~ label:after, .segmented-control > label:first-of-type:nth-last-of-type(6) ~ label:before {
-      width: 16.66667%; }
-  .segmented-control.italic, .segmented-control .italic {
-    font-style: italic; }
-  .segmented-control.bold, .segmented-control .bold {
-    font-weight: bold; }
-  .segmented-control.underline, .segmented-control .underline {
-    text-decoration: underline; }
-  .segmented-control.line-through, .segmented-control .line-through {
-    text-decoration: line-through; }
-
-/*# sourceMappingURL=segmented-controls.css.map */
-.boxme {
-    padding: 30px;
-    border: 1px solid black;
-    margin: 20px;
-}
-</style>
-</head>
-<body>
-  <h1>Go Sprinkler</h1>
-		<div class="toggle-switches">
-        <div class="col-md-3"><div class="s1 boxme">Zone 1<input type="checkbox" unchecked data-toggle="toggle" data-onstyle="info" onchange="doalert(this)"></div></div>
-        <div class="col-md-3"><div class="s2 boxme">Zone 2<input type="checkbox" unchecked data-toggle="toggle" data-onstyle="info"></div></div>
-        <div class="col-md-3"><div class="s3 boxme">Zone 3<input type="checkbox" unchecked data-toggle="toggle" data-onstyle="info"></div></div>
-        <div class="col-md-3"><div class="s4 boxme">Zone 4<input type="checkbox" unchecked data-toggle="toggle" data-onstyle="info"></div></div>
+  </head>
+  <body>
+	<div class="wrapper">
+		<div class="header">
+			<h1>go sprinkler</h1>
 		</div>
-<div class="segmented-control" style="width: 100%; color: #5FBAAC">
-  <input type="radio" name="sc-1-1" id="sc-1-1-1">
-  <input type="radio" name="sc-1-1" id="sc-1-1-2">
-  <input type="radio" name="sc-1-1" id="sc-1-1-3" checked>
-  <input type="radio" name="sc-1-1" id="sc-1-1-4">
-  <input type="radio" name="sc-1-1" id="sc-1-1-5">
-  <input type="radio" name="sc-1-1" id="sc-1-1-6">
-  <label for="sc-1-1-1" data-value="5 Minutes">5 Minute</label>
-  <label for="sc-1-1-2" data-value="15 Minutes">15 Minutes</label>
-  <label for="sc-1-1-3" data-value="30 Minutes">30 Minutes</label>
-  <label for="sc-1-1-4" data-value="1 Hour">1 Hour</label>
-  <label for="sc-1-1-5" data-value="1.5 Hours">1.5 Hours</label>
-  <label for="sc-1-1-6" data-value="2 Hours">2 Hours</label>
-</div>
-
-<script id="jsbin-javascript">
-  function createNode(element) {
-      return document.createElement(element);
-  }
-
-  function append(parent, el) {
-    return parent.appendChild(el);
-  }
-
-  function doalert(checkboxElem) {
-  if (checkboxElem.checked) {
-    fetch(open1)
-  .catch(function(error) {
-    console.log(JSON.stringify(error));
-  }); 
-  } else {
-    fetch(close1)
-  .catch(function(error) {
-    console.log(JSON.stringify(error));
-  }); 
-  }
-}
-
-  const ul = document.getElementById('authors');
-  
-  const open1 = 'http://192.168.88.72:8080/api/valve/1/open';
-  const close1 = 'http://192.168.88.72:8080/api/valve/1/close';
-  
-  const open2 = 'http://192.168.88.72:8080/api/valve/2/open';
-  const close2 = 'http://192.168.88.72:8080/api/valve/2/close';
-  
-  const open3 = 'http://192.168.88.72:8080/api/valve/3/open';
-  const close3 = 'http://192.168.88.72:8080/api/valve/3/close';
-
-  const open4 = 'http://192.168.88.72:8080/api/valve/4/open';
-  const close4 = 'http://192.168.88.72:8080/api/valve/4/close';
-
-
-function submitOpen1Trigger() {
-  fetch(open1)
-  .catch(function(error) {
-    console.log(JSON.stringify(error));
-  });   
-}
-  
-
-function submitClose1Trigger() {
-  fetch(close1)
-  .catch(function(error) {
-    console.log(JSON.stringify(error));
-  });   
-}
-  
-function submitOpen2Trigger() {
-  fetch(open2)
-  .catch(function(error) {
-    console.log(JSON.stringify(error));
-  });   
-}
-  
-
-function submitClose2Trigger() {
-  fetch(close2)
-  .catch(function(error) {
-    console.log(JSON.stringify(error));
-  });   
-}
-  
-function submitOpen3Trigger() {
-  fetch(open3)
-  .catch(function(error) {
-    console.log(JSON.stringify(error));
-  });   
-}
-  
-
-function submitClose3Trigger() {
-  fetch(close3)
-  .catch(function(error) {
-    console.log(JSON.stringify(error));
-  });   
-}
-  
-function submitOpen4Trigger() {
-  fetch(open4)
-  .catch(function(error) {
-    console.log(JSON.stringify(error));
-  });   
-}
-  
-
-function submitClose4Trigger() {
-  fetch(close4)
-  .catch(function(error) {
-    console.log(JSON.stringify(error));
-  });   
-}
-  
-var submitOpen1 = document.querySelector('button.open1');
-submitOpen1.addEventListener('click', submitOpen1Trigger);
-
-var submitClose1 = document.querySelector('button.close1');
-submitClose1.addEventListener('click', submitClose1Trigger);
-    
-var submitOpen2 = document.querySelector('button.open2');
-submitOpen2.addEventListener('click', submitOpen2Trigger);
-
-var submitClose2 = document.querySelector('button.close2');
-submitClose2.addEventListener('click', submitClose2Trigger);
-    
-var submitOpen3 = document.querySelector('button.open3');
-submitOpen3.addEventListener('click', submitOpen3Trigger);
-
-var submitClose3 = document.querySelector('button.close3');
-submitClose3.addEventListener('click', submitClose3Trigger);
-    
-var submitOpen4 = document.querySelector('button.open4');
-submitOpen4.addEventListener('click', submitOpen4Trigger);
-
-var submitClose4 = document.querySelector('button.close4');
-submitClose4.addEventListener('click', submitClose4Trigger);
-  
-</script>
-</body>
+		<div class="main-body">
+			<div class="select-style">
+			  <select>
+				<option value="volvo">Select Duration</option>
+				<option value="saab">1 Minute</option>
+				<option value="mercedes">5 Minutes</option>
+				<option value="audi">10 Minutes</option>
+				<option value="audi">15 Minutes</option>
+				<option value="audi">30 Minutes</option>
+				<option value="audi">1 Hour</option>
+				<option value="audi">1.25 Hour</option>
+				<option value="audi">1.5 Hour</option>
+				<option value="audi">1.75 Hour</option>
+				<option value="audi">2 Hours</option>
+			  </select>
+			</div>
+			<div class="box-style">
+				<div class="inside-box">
+					<div id="valve1" class="checkbox"><div class="s1 boxme"><div class="zone-title pull-left">Zone 1</div><div class="pull-right"><input type="checkbox" id="c1" unchecked data-toggle="toggle" data-onstyle="info" onchange="s1(this)"></div></div></div>
+				</div>
+			</div>
+			<div class="box-style">
+				<div class="inside-box">
+					<div id="valve2" class="checkbox"><div class="s2 boxme"><div class="zone-title pull-left">Zone 1</div><div class="pull-right"><input type="checkbox" id="c2" unchecked data-toggle="toggle" data-onstyle="info" onchange="s2(this)"></div></div></div>
+				</div>
+			</div>
+			<div class="box-style">
+				<div class="inside-box">
+					<div id="valve3" class="checkbox"><div class="s3 boxme"><div class="zone-title pull-left">Zone 1</div><div class="pull-right"><input type="checkbox" id="c3" unchecked data-toggle="toggle" data-onstyle="info" onchange="s3(this)"></div></div></div>
+				</div>
+			</div>
+			<div class="box-style">
+				<div class="inside-box">
+					<div id="valve4" class="checkbox"><div class="s4 boxme"><div class="zone-title pull-left">Zone 1</div><div class="pull-right"><input type="checkbox" id="c4" unchecked data-toggle="toggle" data-onstyle="info" onchange="s4(this)"></div></div></div>
+				</div>
+			</div>
+		</div>
+	</div>
+  </body>
 </html>

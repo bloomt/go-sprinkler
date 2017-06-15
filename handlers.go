@@ -2,13 +2,13 @@ package main
 
 import "net/http"
 
-//"github.com/stianeikeland/go-rpio"
+// "github.com/stianeikeland/go-rpio"
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	http.FileServer(http.Dir("./public")).ServeHTTP(w, r)
 }
 
-//Start of custom code
+// Start of custom code
 // GPIO return Struct
 type GPIOReturn struct {
 	Title  string `json:"title"`
