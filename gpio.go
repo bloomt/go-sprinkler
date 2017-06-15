@@ -36,7 +36,7 @@ func ControllValve(gpio int, highlow string) {
 		var timeCompare = currentTime.Add(duration)
 		//fmt.Println(currentTime)
 		//fmt.Println(timeCompare)
-		//fmt.Println(duration)
+		fmt.Println(duration)
 
 		breakFor = timeCompare.After(timeOut)
 		//fmt.Println(breakFor)
