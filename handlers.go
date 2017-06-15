@@ -1,6 +1,10 @@
 package main
 
-import "net/http"
+import (
+	"encoding/json"
+	"net/http"
+	"time"
+)
 
 // "github.com/stianeikeland/go-rpio"
 
@@ -11,14 +15,24 @@ func Index(w http.ResponseWriter, r *http.Request) {
 // Start of custom code
 // GPIO return Struct
 type GPIOReturn struct {
-	Title  string `json:"title"`
-	Rating string `json:"rating"`
-	Year   string `json:"year"`
+	Time time.Time `json:"title"`
 }
+
+type GPIOReturns []GPIOReturn
 
 //Open Relay 1
 func Open1(w http.ResponseWriter, r *http.Request) {
 	ControllValve(1, "h")
+
+	//First attempt at returning time for clock
+	gpioreturns := GPIOReturns{
+		GPIOReturn{Time: duration},
+	}
+
+	if err := json.NewEncoder(w).Encode(gpioreturns); err != nil {
+		panic(err)
+	}
+	//End attempt at returning time for clock
 }
 
 //Close Relay 1

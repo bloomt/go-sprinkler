@@ -15,10 +15,11 @@ var (
 	breakFor    bool           //Break for loop if time has expired bool
 	oneMin      = 10 * time.Second
 	timerStatus = 0 //initialize timer status to 0 off
+	duration    = time.Now()
 )
 
 //Function to start timer - will be called by a goroutine
-func startTimer() {
+func StartTimer() {
 
 	var currentTime = time.Now()
 	var timeOut = currentTime.Add(oneMin)
@@ -54,19 +55,19 @@ func ControllValve(gpio int, highlow string) {
 
 	if gpio == 1 && highlow == "h" {
 		pin1.High()
-		go startTimer()
+		go StartTimer()
 		//fmt.Println("Pin 1 Open")
 
 	} else if gpio == 2 && highlow == "h" {
 		pin2.High()
-		go startTimer()
+		go StartTimer()
 
 	} else if gpio == 3 && highlow == "h" {
 		pin3.High()
-		go startTimer()
+		go StartTimer()
 	} else if gpio == 4 && highlow == "h" {
 		pin4.High()
-		go startTimer()
+		go StartTimer()
 
 	} else if gpio == 1 && highlow == "l" {
 		pin1.Low()
