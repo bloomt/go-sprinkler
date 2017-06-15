@@ -1,33 +1,11 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
+import "net/http"
 
-	//"github.com/stianeikeland/go-rpio"
-	"github.com/gorilla/mux"
-)
+//"github.com/stianeikeland/go-rpio"
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	http.FileServer(http.Dir("./public")).ServeHTTP(w, r)
-}
-
-func TodoIndex(w http.ResponseWriter, r *http.Request) {
-	todos := Todos{
-		Todo{Name: "Write presentation"},
-		Todo{Name: "Host meetup"},
-	}
-
-	if err := json.NewEncoder(w).Encode(todos); err != nil {
-		panic(err)
-	}
-}
-
-func TodoShow(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	todoId := vars["todoId"]
-	fmt.Fprintln(w, "Todo show:", todoId)
 }
 
 //Start of custom code
