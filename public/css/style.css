@@ -1,3 +1,10 @@
+body {
+    background-color: rgb(247, 252, 255)!important;
+}
+.header {
+    text-align: center;
+    margin-top: 20px;
+}
 .wrapper {
     max-width: 400px;
     margin: 0 auto;
@@ -5,6 +12,7 @@
 .main-body {
     padding: 40px 10px;
     border: black 1px solid;
+    background-color: white;
 }
 .select-style, .box-style {
     border: 1px solid #ccc;
